@@ -1,14 +1,6 @@
 import baseApiClass from "@src/api/baseApiClass";
+import type { IStudententry } from "@src/types/studentEntry";
 
-interface Student {
-  id: number;
-  name: string;
-  marks: number;
-  subject: string;
-  grade: string;
-  date: string;
-  time: string;
-}
 
 class StudentApiClient extends baseApiClass {
   constructor() {
@@ -16,20 +8,20 @@ class StudentApiClient extends baseApiClass {
   }
 
  
-  public async getStudents(): Promise<Student[]> {
-    return this.get<Student[]>("/");
+  public async getStudents(): Promise<IStudententry[]> {
+    return this.get<IStudententry[]>("/");
   }
 
-  public async getStudentById(id: number): Promise<Student> {
-    return this.get<Student>(`/${id}`);
+  public async getStudentById(id: number): Promise<IStudententry> {
+    return this.get<IStudententry>(`/${id}`);
   }
 
-  public async createStudent(data: Omit<Student, "id">): Promise<Student> {
-    return this.post<Student>("/", data);
+  public async createStudent(data: Omit<IStudententry, "id">): Promise<IStudententry> {
+    return this.post<IStudententry>("/", data);
   }
 
-  public async updateStudent(id: number, data: Partial<Student>): Promise<Student> {
-    return this.put<Student>(`/${id}`, data);
+  public async updateStudent(id: number, data: Partial<IStudententry>): Promise<IStudententry> {
+    return this.put<IStudententry>(`/${id}`, data);
   }
 
   public async deleteStudent(id: number): Promise<{ message: string }> {

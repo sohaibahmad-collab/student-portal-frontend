@@ -18,7 +18,7 @@ const Button: React.FC<IButtonProps> = ({
 }) => {
   const variantStyles: Record<string, string> = {
     primary: "bg-[#38A38A] text-white hover:bg-[#2e8670]",
-    secondary: "bg-white border text-gray-700 hover:bg-gray-100",
+    secondary: "border border-[#EFF2F7] bg-white  font-poppins font-medium text-sm leading-[100%] tracking-[0%] text-[#343744] hover:bg-gray-100",
     danger: "bg-[#FF7D9D] text-white hover:bg-[#e66784]",
   };
 

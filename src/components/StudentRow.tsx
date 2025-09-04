@@ -19,14 +19,14 @@ const StudentRow: React.FC<IStudentRowProps> = ({ student }) => {
   const [openDropdown, setOpenDropdown] = useState(false);
 
   return (
-    <tr className="border-b hover:bg-gray-50 transition">
-      <td className="py-3 px-4">{student.name}</td>
-      <td className="py-3 px-4">{student.marks}</td>
-      <td className="py-3 px-4">{student.subject}</td>
-      <td className="py-3 px-4">
+    <tr className="border-b-2 border-b-[#F6F6F6] transition">
+      <td className="py-3 px-4 text-[#343744] text-[16px] font-poppins font-medium text-base leading-[100%] tracking-[0%]">{student.name}</td>
+      <td className="py-3 px-4 text-[#343744] text-[16px] font-poppins font-medium text-base leading-[100%] tracking-[0%]">{student.marks}</td>
+      <td className="py-3 px-4 text-[#343744] text-[16px] font-poppins font-medium text-base leading-[100%] tracking-[0%]">{student.subject}</td>
+      <td className="py-3 px-4 text-[#343744] text-[16px] font-poppins font-medium text-base leading-[100%] tracking-[0%]">
         <GradeBadge grade={student.grade} />
       </td>
-      <td className="py-3 px-4">
+      <td className="text-[#343744] text-[16px] font-poppins font-medium text-base leading-[100%] tracking-[0%]">
         {student.date}
         <p className="text-xs text-gray-500">at {student.time}</p>
       </td>
