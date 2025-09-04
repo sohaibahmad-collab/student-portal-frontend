@@ -1,8 +1,9 @@
 import React from "react";
+import { MoreVertical, Edit, Trash } from "lucide-react";
 
 interface IButtonProps {
   label: string;
-  icon?: React.ReactNode; 
+  icon?:String;
   onClick?: () => void;
   variant?: "primary" | "secondary" | "danger";
   disabled?: boolean;
@@ -21,22 +22,19 @@ const Button: React.FC<IButtonProps> = ({
     danger: "bg-[#FF7D9D] text-white hover:bg-[#e66784]",
   };
 
-  
   if (icon) {
     return (
       <button
-        onClick={onClick}
-        disabled={disabled}
-        className={`flex items-center gap-2 rounded-md font-medium transition px-4 py-2 text-sm
-          ${variantStyles[variant]}
-          ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
-      >
-        {icon}
-      </button>
-      
+      onClick={onClick}
+      className={`flex items-center gap-2 px-4 py-2 hover:bg-gray-100 w-full text-sm ${label==='Delete'?'text-red-500':''}`}
+    >
+      {label==='Edit'?<Edit size={16} />:null}
+      {label==='Delete'?<Trash size={16} />:null}
+      {label===''?<MoreVertical size={18} />:null}
+      {label}
+    </button>
     );
   }
-
 
   return (
     <button

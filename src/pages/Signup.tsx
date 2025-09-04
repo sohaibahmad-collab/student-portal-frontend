@@ -1,4 +1,3 @@
-import { User, Mail, Lock } from "lucide-react";
 import { Link } from "react-router-dom";
 import Button from "@src/components/common/Button";
 import Input from "@src/components/common/Input";
@@ -17,28 +16,24 @@ export default function SignUp() {
               label="Full Name"
               placeholder="Enter your name"
               type="text"
-              icon={User}
             />
 
             <Input
               label="Email"
               placeholder="Enter your email"
               type="email"
-              icon={Mail}
             />
 
             <Input
               label="Password"
               placeholder="Enter your password"
               type="password"
-              icon={Lock}
             />
 
             <Input
               label="Confirm Password"
               placeholder="Confirm your password"
               type="password"
-              icon={Lock}
             />
 
             <Button label="Sign Up" variant="primary" />

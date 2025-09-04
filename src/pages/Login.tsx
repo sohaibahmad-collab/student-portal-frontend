@@ -1,6 +1,5 @@
 import Button from "@src/components/common/Button";
 import Input from "@src/components/common/Input";
-import { Lock, Mail } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -18,13 +17,13 @@ export default function Login() {
               label="Email"
               placeholder="Enter your email"
               type="email"
-              icon={Mail}
+              
             />
             <Input
               label="Password"
               placeholder="Enter your password"
               type="password"
-              icon={Lock}
+             
             />
 
             <Button

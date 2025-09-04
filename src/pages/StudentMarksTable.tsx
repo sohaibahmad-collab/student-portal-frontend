@@ -3,7 +3,7 @@ import SummaryCard from "@src/components/common/SummaryCard";
 import StudentRow from "@src/components/StudentRow";
 import { useNavigate } from "react-router-dom";
 
-export default function StudentPortal() {
+export default function StudentMarksTable() {
   const navigate = useNavigate();
 
   const students = [
