@@ -1,6 +1,7 @@
 import Button from "@src/components/common/Button";
 import Input from "@src/components/common/Input";
 import { useNavigate } from "react-router-dom";
+import { Mail, Lock } from "lucide-react";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -17,20 +18,23 @@ export default function Login() {
               label="Email"
               placeholder="Enter your email"
               type="email"
+              Icon={Mail}
               
             />
             <Input
               label="Password"
               placeholder="Enter your password"
               type="password"
+              Icon={Lock}
              
             />
-
-            <Button
+            <div className="flex justify-center">
+             <Button
               variant="primary"
               label="Login"
               onClick={() => navigate("/portal")}
             />
+             </div>
           </form>
 
           <p className="text-sm text-gray-600 mt-6 text-center">

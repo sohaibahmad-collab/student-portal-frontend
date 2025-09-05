@@ -1,21 +1,10 @@
 import { useState } from "react";
 import GradeBadge from "@src/components/common/GradeBadge";
 import Button from "@src/components/common/Button";
-interface IStudent {
-  id: number;
-  name: string;
-  marks: number;
-  subject: string;
-  grade: string;
-  date: string;
-  time: string;
-}
+import type { IStudententry } from "@src/types/studentEntry";
 
-interface IStudentRowProps {
-  student: IStudent;
-}
 
-const StudentRow: React.FC<IStudentRowProps> = ({ student }) => {
+const StudentRow: React.FC<IStudententry> = ({ student }: IStudententry) => {
   const [openDropdown, setOpenDropdown] = useState(false);
 
   return (

@@ -1,10 +1,11 @@
 import baseApiClass from "@src/api/baseApiClass";
 import type { IStudententry } from "@src/types/studentEntry";
-
+import { API_BASE_URL, API_URL_PATHS } from "@src/config"
 
 class StudentApiClient extends baseApiClass {
+  private static resourceUrl = API_BASE_URL + API_URL_PATHS.students;
   constructor() {
-    super("http://localhost:5000/api/students"); 
+    super(StudentApiClient.resourceUrl)
   }
 
  

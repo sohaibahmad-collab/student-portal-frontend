@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Button from "@src/components/common/Button";
 import Input from "@src/components/common/Input";
+import { Mail, Lock,User } from "lucide-react";
 
 export default function SignUp() {
   return (
@@ -13,30 +14,35 @@ export default function SignUp() {
 
           <form className="space-y-5">
             <Input
+              Icon={User}
               label="Full Name"
               placeholder="Enter your name"
               type="text"
             />
 
             <Input
+              Icon={Mail}
               label="Email"
               placeholder="Enter your email"
               type="email"
             />
 
             <Input
+              Icon={Lock}
               label="Password"
               placeholder="Enter your password"
               type="password"
             />
 
             <Input
+               Icon={Lock}
               label="Confirm Password"
               placeholder="Confirm your password"
               type="password"
             />
-
+              <div className="flex justify-center">
             <Button label="Sign Up" variant="primary" />
+            </div>
           </form>
 
           <p className="text-sm text-gray-600 mt-6 text-center">
