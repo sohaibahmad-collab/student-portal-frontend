@@ -7,7 +7,6 @@ interface IGradeBadgeProps {
 const GradeBadge: React.FC<IGradeBadgeProps> = ({ grade }) => {
   const getBadgeStyles = (grade: string): string => {
     switch (grade) {
-      case "A+":
       case "A":
         return "bg-green-200 text-green-700";
       case "B+":
