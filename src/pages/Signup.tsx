@@ -1,9 +1,25 @@
 import { Link } from "react-router-dom";
 import Button from "@src/components/common/Button";
 import Input from "@src/components/common/Input";
-import { Mail, Lock,User } from "lucide-react";
+import { Mail, Lock, User } from "lucide-react";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { signUpSchema, type SignUpFormData } from "@src/schema/signUpFormSchema";
 
 export default function SignUp() {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignUpFormData>({
+    resolver: yupResolver(signUpSchema),
+    mode:"onChange"
+  });
+
+  const onSubmit = (data: SignUpFormData) => {
+    console.log("✅ Form submitted:", data);
+  };
+
   return (
     <div className="h-screen w-full bg-[url('/background.jpg')] bg-cover bg-center">
       <div className="flex items-center justify-center min-h-screen">
@@ -12,36 +28,93 @@ export default function SignUp() {
             Create Account
           </h2>
 
-          <form className="space-y-5">
-            <Input
-              Icon={User}
-              label="Full Name"
-              placeholder="Enter your name"
-              type="text"
-            />
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+           
+            <div className="relative">
+              <Controller
+                name="name"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    Icon={User}
+                    label="Full Name"
+                    placeholder="Enter your name"
+                    type="text"
+                    value={field.value}
+                    onChange={(val) => field.onChange(val)} 
+                  />
+                )}
+              />
+              {errors.name && (
+                <p  className="text-red-500 text-sm mt-1 absolute top-14">{errors.name.message}</p>
+              )}
+            </div>
 
-            <Input
-              Icon={Mail}
-              label="Email"
-              placeholder="Enter your email"
-              type="email"
-            />
+           
+            <div>
+              <Controller
+                name="email"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    Icon={Mail}
+                    label="Email"
+                    placeholder="Enter your email"
+                    type="email"
+                    value={field.value}
+                    onChange={(val) => field.onChange(val)}
+                  />
+                )}
+              />
+              {errors.email && (
+                <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+              )}
+            </div>
 
-            <Input
-              Icon={Lock}
-              label="Password"
-              placeholder="Enter your password"
-              type="password"
-            />
+           
+            <div>
+              <Controller
+                name="password"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    Icon={Lock}
+                    label="Password"
+                    placeholder="Enter your password"
+                    type="password"
+                    value={field.value}
+                    onChange={(val) => field.onChange(val)}
+                  />
+                )}
+              />
+              {errors.password && (
+                <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
+              )}
+            </div>
 
-            <Input
-               Icon={Lock}
-              label="Confirm Password"
-              placeholder="Confirm your password"
-              type="password"
-            />
-              <div className="flex justify-center">
-            <Button label="Sign Up" variant="primary" />
+           
+            <div>
+              <Controller
+                name="confirmPassword"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    Icon={Lock}
+                    label="Confirm Password"
+                    placeholder="Confirm your password"
+                    type="password"
+                    value={field.value}
+                    onChange={(val) => field.onChange(val)}
+                  />
+                )}
+              />
+              {errors.confirmPassword && (
+                <p className="text-red-500 text-sm mt-1">{errors.confirmPassword.message}</p>
+              )}
+            </div>
+
+            <div className="flex justify-center">
+              <Button label="Sign Up" variant="primary" />
             </div>
           </form>
 

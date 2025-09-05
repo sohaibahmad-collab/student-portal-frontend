@@ -2,6 +2,7 @@ import React from "react";
 import type  { LucideIcon } from "lucide-react";
 
 interface IButtonProps {
+  type?: "button" | "submit" | "reset";
   label: string;
   Icon?: LucideIcon;
   onClick?: () => void;
@@ -12,6 +13,7 @@ interface IButtonProps {
 const Button: React.FC<IButtonProps> = ({
   label,
   Icon,
+  type,
   onClick,
   variant = "primary",
   disabled = false,
@@ -39,6 +41,7 @@ const Button: React.FC<IButtonProps> = ({
 
   return (
     <button
+      type={type}
       onClick={onClick}
       disabled={disabled}
       className={`rounded-md font-medium transition px-6 py-2 text-sm

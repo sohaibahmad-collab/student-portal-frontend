@@ -55,7 +55,7 @@ export default function AddStudentData() {
 
           <div className="flex justify-between pt-4">
             <Button label="Cancel" variant="primary" />
-            <Button label="Add" variant="secondary" />
+            <Button label="Add" variant="secondary" type='submit' />
           </div>
         </form>
       </div>

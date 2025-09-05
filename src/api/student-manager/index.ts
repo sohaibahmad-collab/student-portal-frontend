@@ -21,11 +21,11 @@ class StudentApiClient extends baseApiClass {
     return this.post<IStudententry>("/", data);
   }
 
-  public async updateStudent(id: number, data: Partial<IStudententry>): Promise<IStudententry> {
+  public async updateStudent(id: string, data: Partial<IStudententry>): Promise<IStudententry> {
     return this.put<IStudententry>(`/${id}`, data);
   }
 
-  public async deleteStudent(id: number): Promise<{ message: string }> {
+  public async deleteStudent(id: string): Promise<{ message: string }> {
     return this.delete<{ message: string }>(`/${id}`);
   }
 }

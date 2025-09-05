@@ -1,11 +1,9 @@
 export interface IStudententry {
-  student: {
-    id: number;
+    id: string;
     name: string;
     marks: number;
     subject: string;
     grade: string;
     date: string;
     time: string;
-  };
 }

@@ -2,13 +2,13 @@ import Button from "@src/components/common/Button";
 import SummaryCard from "@src/components/common/SummaryCard";
 import StudentRow from "@src/components/StudentRow";
 import { useNavigate } from "react-router-dom";
-
+import type { IStudententry } from "@src/types/studentEntry";
 export default function StudentMarksTable() {
   const navigate = useNavigate();
 
-  const students = [
+  const students:IStudententry[] = [
     {
-      id: 1,
+      id: "1",
       name: "Ali Tahir",
       marks: 80,
       subject: "English",
@@ -17,7 +17,7 @@ export default function StudentMarksTable() {
       time: "08.00 PM",
     },
     {
-      id: 2,
+      id: "2",
       name: "Ameer Hamza",
       marks: 33,
       subject: "Math",
@@ -81,7 +81,7 @@ export default function StudentMarksTable() {
           </thead>
           <tbody>
             {students.map((s) => (
-              <StudentRow key={s.id} student={s} />
+              <StudentRow key={s.id} {...s} />
             ))}
           </tbody>
         </table>

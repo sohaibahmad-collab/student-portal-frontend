@@ -18,4 +18,5 @@ export const API_BASE_URL = validateEnvVar("VITE_API_BASE_URL");
 
 export const API_URL_PATHS = {
   students: "/students",
+  auth:"/auth"
 };
