@@ -2,6 +2,7 @@ import { useState } from "react";
 import GradeBadge from "@src/components/common/GradeBadge";
 import Button from "@src/components/common/Button";
 import type { IStudententry } from "@src/types/studentEntry";
+import { MoreVertical, Edit, Trash } from "lucide-react";
 
 
 const StudentRow: React.FC<IStudententry> = ({ student }: IStudententry) => {
@@ -22,14 +23,14 @@ const StudentRow: React.FC<IStudententry> = ({ student }: IStudententry) => {
       <td className="py-3 px-4 relative">
         <Button
           label=""
-          icon="icon"
+          Icon={MoreVertical}
           variant="secondary"
           onClick={() => setOpenDropdown(!openDropdown)}
         />
         {openDropdown && (
           <div className="absolute right-0 top-0 mt-0 w-32 bg-white border rounded shadow-lg z-300">
-            <Button icon="icon" label="Edit" />
-            <Button icon="icon" label="Delete" />
+            <Button Icon={Edit} label="Edit" />
+            <Button Icon={Trash} label="Delete" />
           </div>
         )}
       </td>

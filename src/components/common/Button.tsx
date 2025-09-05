@@ -1,9 +1,9 @@
 import React from "react";
-import { MoreVertical, Edit, Trash } from "lucide-react";
+import type  { LucideIcon } from "lucide-react";
 
 interface IButtonProps {
   label: string;
-  icon?: String;
+  Icon?: LucideIcon;
   onClick?: () => void;
   variant?: "primary" | "secondary" | "danger";
   disabled?: boolean;
@@ -11,7 +11,7 @@ interface IButtonProps {
 
 const Button: React.FC<IButtonProps> = ({
   label,
-  icon,
+  Icon,
   onClick,
   variant = "primary",
   disabled = false,
@@ -23,17 +23,15 @@ const Button: React.FC<IButtonProps> = ({
     danger: "bg-[#FF7D9D] text-white hover:bg-[#e66784]",
   };
 
-  if (icon) {
+  if (Icon) {
     return (
       <button
         onClick={onClick}
         className={`flex items-center gap-2 px-4 py-2 hover:bg-gray-100 w-full text-sm ${
           label === "Delete" ? "text-red-500" : ""
         }`}
-      >
-        {label === "Edit" ? <Edit size={16} /> : null}
-        {label === "Delete" ? <Trash size={16} /> : null}
-        {label === "" ? <MoreVertical size={18} /> : null}
+      > 
+        <Icon size={16} />
         {label}
       </button>
     );
