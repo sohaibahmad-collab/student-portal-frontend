@@ -2,9 +2,6 @@ import baseApiClass from "@src/api/baseApiClass";
 import { API_BASE_URL, API_URL_PATHS } from "@src/config";
 
 export interface IAuthUser {
-  id: string;
-  name: string;
-  email: string;
   token: string; 
 }
 
@@ -34,10 +31,6 @@ class AuthApiClient extends baseApiClass {
   
   public async register(data: IRegisterPayload): Promise<IAuthUser> {
     return this.post<IAuthUser>("/register", data,false);
-  }
- 
-  public async logout(): Promise<{ message: string }> {
-    return this.post<{ message: string }>("/logout", {},false);
   }
 }
 

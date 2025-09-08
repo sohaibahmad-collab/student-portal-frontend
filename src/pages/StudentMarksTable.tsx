@@ -1,17 +1,46 @@
 import Button from "@src/components/common/Button";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import SummaryCard from "@src/components/common/SummaryCard";
 import StudentRow from "@src/components/StudentRow";
 import { useNavigate } from "react-router-dom";
 import { useStudents } from "@src/hooks/useStudents";
 export default function StudentMarksTable() {
-  const { items,fetchStudents } = useStudents();
+  const { items, fetchStudents } = useStudents();
+  const grades = ["A+", "A-", "B+", "B-", "F"];
+  const gradeRank = (grade: string) => grades.indexOf(grade);
+  const [topGrade, setTopGrade] = useState("");
+  const [lowestGrade, setLowestGrade] = useState("");
+  const [mostPassed, setMostPassed] = useState("");
+  const [mostFailed, setMostFailed] = useState("");
 
   useEffect(() => {
     fetchStudents();
   }, []);
-  
 
+  useEffect(() => {
+    if (items.length === 0) return;
+
+    const topGradeItem = items.reduce((prev, curr) =>
+      gradeRank(curr.grade) < gradeRank(prev.grade) ? curr : prev
+    ).grade;
+
+    const lowestGradeItem = items.reduce((prev, curr) =>
+      gradeRank(curr.grade) > gradeRank(prev.grade) ? curr : prev
+    ).grade;
+
+    const mostPassedSubject = items.reduce((prev, curr) =>
+      curr.marks > prev.marks ? curr : prev
+    ).subject;
+
+    const mostFailedSubject = items.reduce((prev, curr) =>
+      curr.marks < prev.marks ? curr : prev
+    ).subject;
+
+    setTopGrade(topGradeItem);
+    setLowestGrade(lowestGradeItem);
+    setMostPassed(mostPassedSubject);
+    setMostFailed(mostFailedSubject);
+  }, [items]);
   const navigate = useNavigate();
 
   return (
@@ -34,10 +63,10 @@ export default function StudentMarksTable() {
       </div>
       <div className="mx-14">
         <div className="w-full flex justify-between flex-row flex-wrap mb-6">
-          <SummaryCard title="Top Grade" value="A+" color="green" />
-          <SummaryCard title="Most Passed" value="English" color="green" />
-          <SummaryCard title="Lowest Grade" value="F" color="pink" />
-          <SummaryCard title="Most Failed" value="Math" color="pink" />
+          <SummaryCard title="Top Grade" value={topGrade} color="green" />
+          <SummaryCard title="Most Passed" value={mostPassed} color="green" />
+          <SummaryCard title="Lowest Grade" value={lowestGrade} color="pink" />
+          <SummaryCard title="Most Failed" value={mostFailed} color="pink" />
         </div>
       </div>
 

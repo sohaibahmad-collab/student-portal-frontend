@@ -5,8 +5,10 @@ import { Mail, Lock, User } from "lucide-react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signUpSchema, type SignUpFormData } from "@src/schema/signUpFormSchema";
+import { useAuth } from "@src/hooks/useAuth";
 
 export default function SignUp() {
+   const {register}=useAuth()
   const {
     control,
     handleSubmit,
@@ -17,7 +19,8 @@ export default function SignUp() {
   });
 
   const onSubmit = (data: SignUpFormData) => {
-    console.log("✅ Form submitted:", data);
+     const {name,email,password} =data
+     register(name,email,password)
   };
 
   return (
@@ -114,7 +117,7 @@ export default function SignUp() {
             </div>
 
             <div className="flex justify-center">
-              <Button label="Sign Up" variant="primary" />
+              <Button label="Sign Up" variant="primary" type="submit" />
             </div>
           </form>
 
