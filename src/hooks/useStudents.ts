@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "@src/redux/store";
+
 import {
   fetchStudentsRequest,
   addStudentsRequest,
@@ -21,7 +22,7 @@ export const useStudents = () => {
     dispatch(fetchStudentsRequest());
   };
 
-   const addStudent = (student: Omit<IStudententry, "id" | "date" | "time">) => {
+   const addStudent = (student: Omit<IStudententry, "_id" | "date" | "time">) => {
     const now = new Date();
 
     dispatch(
@@ -34,6 +35,7 @@ export const useStudents = () => {
   };
 
   const updateStudent = (id: string, updated: Partial<IStudententry>) => {
+  
     dispatch(updateStudentsRequest({ id, updated }));
   };
 

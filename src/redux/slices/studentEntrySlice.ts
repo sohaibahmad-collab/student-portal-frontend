@@ -31,7 +31,7 @@ const studentsSlice = createSlice({
 
     addStudentsRequest: (
       state,
-      _action: PayloadAction<Omit<IStudententry, "id">>
+      _action: PayloadAction<Omit<IStudententry, "_id">>
     ) => {
       state.loading = true;
     },
@@ -52,7 +52,7 @@ const studentsSlice = createSlice({
     },
     updateStudentsSuccess: (state, action: PayloadAction<IStudententry>) => {
       state.items = state.items.map((exp) =>
-        exp.id === action.payload.id ? action.payload : exp
+        exp._id === action.payload._id ? action.payload : exp
       );
       state.loading = false;
     },
@@ -65,7 +65,7 @@ const studentsSlice = createSlice({
       state.loading = true;
     },
     deleteStudentsSuccess: (state, action: PayloadAction<string>) => {
-      state.items = state.items.filter((exp) => exp.id !== action.payload);
+      state.items = state.items.filter((exp) => exp._id !== action.payload);
       state.loading = false;
     },
     deleteStudentsFailure: (state, action: PayloadAction<string>) => {
