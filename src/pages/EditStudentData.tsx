@@ -68,12 +68,8 @@ export default function EditStudentData() {
                   placeholder="Enter name"
                   value={field.value}
                   onChange={(val) => field.onChange(val)}
+                   error={errors.name?.message}
                 />
-                {errors.name && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.name.message}
-                  </p>
-                )}
               </div>
             )}
           />
@@ -89,12 +85,8 @@ export default function EditStudentData() {
                   placeholder="Enter Marks"
                   value={field.value?.toString() ?? ""}
                   onChange={(val) => field.onChange(Number(val))}
+                   error={errors.marks?.message}
                 />
-                {errors.marks && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.marks.message}
-                  </p>
-                )}
               </div>
             )}
           />
@@ -110,12 +102,8 @@ export default function EditStudentData() {
                   options={subjects}
                   placeholder="Select Subject"
                   onChange={field.onChange}
+                   error={errors.subject?.message}
                 />
-                {errors.subject && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.subject.message}
-                  </p>
-                )}
               </div>
             )}
           />
@@ -131,12 +119,8 @@ export default function EditStudentData() {
                   options={grades}
                   placeholder="Select Grade"
                   onChange={field.onChange}
+                   error={errors.grade?.message}
                 />
-                {errors.grade && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.grade.message}
-                  </p>
-                )}
               </div>
             )}
           />

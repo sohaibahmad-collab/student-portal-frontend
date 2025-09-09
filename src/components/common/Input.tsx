@@ -1,15 +1,17 @@
 import type { LucideIcon } from "lucide-react";
 interface IInputProps {
   label: string;
+  error?: string;
   type?: string;
   value?: string;
   placeholder?: string;
-  Icon?: LucideIcon; 
+  Icon?: LucideIcon;
   onChange?: (value: string) => void;
 }
 
 export default function Input({
   label,
+  error,
   Icon,
   type = "text",
   value,
@@ -29,6 +31,7 @@ export default function Input({
           className="w-full focus:outline-none text-sm"
         />
       </div>
+      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
     </div>
   );
 }

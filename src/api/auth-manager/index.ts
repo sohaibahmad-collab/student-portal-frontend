@@ -19,9 +19,6 @@ export interface IRegisterPayload {
 class AuthApiClient extends baseApiClass {
   private static resourceUrl = API_BASE_URL + API_URL_PATHS.auth;
 
-  constructor() {
-    super(); 
-  }
 
   public async login(data: ILoginPayload): Promise<IAuthUser> {
     return this.post<IAuthUser>(

@@ -45,12 +45,10 @@ export default function SignUp() {
                     type="text"
                     value={field.value}
                     onChange={(val) => field.onChange(val)} 
+                    error={errors.name?.message}
                   />
                 )}
               />
-              {errors.name && (
-                <p  className="text-red-500 text-sm mt-1 absolute top-14">{errors.name.message}</p>
-              )}
             </div>
 
            
@@ -66,12 +64,10 @@ export default function SignUp() {
                     type="email"
                     value={field.value}
                     onChange={(val) => field.onChange(val)}
+                     error={errors.email?.message}
                   />
                 )}
               />
-              {errors.email && (
-                <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
-              )}
             </div>
 
            
@@ -87,12 +83,10 @@ export default function SignUp() {
                     type="password"
                     value={field.value}
                     onChange={(val) => field.onChange(val)}
+                     error={errors.password?.message}
                   />
                 )}
               />
-              {errors.password && (
-                <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
-              )}
             </div>
 
            
@@ -108,12 +102,10 @@ export default function SignUp() {
                     type="password"
                     value={field.value}
                     onChange={(val) => field.onChange(val)}
+                    error={errors.confirmPassword?.message}
                   />
                 )}
               />
-              {errors.confirmPassword && (
-                <p className="text-red-500 text-sm mt-1">{errors.confirmPassword.message}</p>
-              )}
             </div>
 
             <div className="flex justify-center">

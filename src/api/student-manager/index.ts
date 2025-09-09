@@ -4,11 +4,7 @@ import { API_BASE_URL, API_URL_PATHS } from "@src/config";
 
 class StudentApiClient extends baseApiClass {
   private static resourceUrl = API_BASE_URL + API_URL_PATHS.students;
-
-  constructor() {
-    super();
-  }
-
+  
   public async getStudents(): Promise<IStudententry[]> {
     return this.get<IStudententry[]>(`${StudentApiClient.resourceUrl}`);
   }

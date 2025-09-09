@@ -6,11 +6,13 @@ interface IDropdownProps {
   value: string;
   options: string[];
   placeholder?: string;
+  error?:string
   onChange: (value: string) => void;
 }
 
 export default function Dropdown({
   label,
+  error,
   value,
   options,
   placeholder = "Select",
@@ -62,6 +64,7 @@ export default function Dropdown({
           </div>
         )}
       </div>
+      {error && <p className="text-red-500 text-sm mt-1 ">{error}</p>}
     </div>
   );
 }
