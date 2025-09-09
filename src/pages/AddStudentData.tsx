@@ -7,14 +7,13 @@ import { useStudents } from "@src/hooks/useStudents";
 import type { IFormValues } from "@src/types/formValues";
 import { studentFormSchema } from "@src/schema/studentFormSchema";
 import { useNavigate } from "react-router-dom";
+import { subjects, grades } from "@src/constants/academic";
 
 export default function AddStudentData() {
   const { addStudent } = useStudents();
   const navigate = useNavigate();
 
-  const subjects = ["English", "Math", "Science"];
-  const grades = ["A+", "A-", "B+", "B-", "F"];
-
+  
   const {
     control,
     handleSubmit,

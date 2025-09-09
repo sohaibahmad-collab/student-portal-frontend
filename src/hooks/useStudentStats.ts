@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useStudents } from "./useStudents";
+import { grades } from "@src/constants/academic";
 
-const grades = ["A+", "A-", "B+", "B-", "F"];
 const gradeRank = (grade: string) => grades.indexOf(grade);
 
 export function useStudentStats() {

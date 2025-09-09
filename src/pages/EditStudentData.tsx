@@ -8,6 +8,7 @@ import type { IFormValues } from "@src/types/formValues";
 import { studentFormSchema } from "@src/schema/studentFormSchema";
 import { useParams} from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { subjects, grades } from "@src/constants/academic";
 
 
 export default function EditStudentData() {
@@ -18,10 +19,6 @@ export default function EditStudentData() {
   
  const student= items.find((s) => s._id === id);
    
- 
-
-  const subjects = ["English", "Math", "Science"];
-  const grades = ["A+", "A-", "B+", "B-", "F"];
 
   const {
     control,
