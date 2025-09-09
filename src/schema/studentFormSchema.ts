@@ -4,6 +4,7 @@ import * as yup from "yup";
 export const studentFormSchema = yup.object({
   name: yup
     .string()
+    .trim()
     .matches(/^[A-Za-z ]+$/, "Name should contain only alphabets")
     .required("Name is required"),
   marks: yup

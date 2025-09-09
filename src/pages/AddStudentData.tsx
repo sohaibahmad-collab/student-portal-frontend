@@ -6,9 +6,11 @@ import Button from "@src/components/common/Button";
 import { useStudents } from "@src/hooks/useStudents";
 import type { IFormValues } from "@src/types/formValues";
 import { studentFormSchema } from "@src/schema/studentFormSchema";
+import { useNavigate } from "react-router-dom";
 
 export default function AddStudentData() {
   const { addStudent } = useStudents();
+  const navigate=useNavigate();
 
   const subjects = ["English", "Math", "Science"];
   const grades = ["A+", "A-", "B+", "B-", "F"];
@@ -129,7 +131,7 @@ export default function AddStudentData() {
               label="Cancel"
               variant="primary"
               type="button"
-              onClick={() => reset()}
+              onClick={() => navigate('/portal')}
             />
             <Button label="Add" variant="secondary" type="submit" />
           </div>

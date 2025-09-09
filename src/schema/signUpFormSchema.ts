@@ -17,6 +17,7 @@ export interface LoginFormData {
 export const signUpSchema = yup.object().shape({
   name: yup
     .string()
+    .trim()
     .required("Full Name is required")
     .matches(/^[A-Za-z\s]+$/, "Full Name should only contain alphabets"),
   email: yup

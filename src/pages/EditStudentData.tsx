@@ -7,9 +7,11 @@ import { useStudents } from "@src/hooks/useStudents";
 import type { IFormValues } from "@src/types/formValues";
 import { studentFormSchema } from "@src/schema/studentFormSchema";
 import { useParams} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 export default function EditStudentData() {
+  const navigate=useNavigate();
   const { updateStudent,items } = useStudents();
 
   const { id }=useParams<{ id: string }>()
@@ -144,7 +146,7 @@ export default function EditStudentData() {
               label="Cancel"
               variant="primary"
               type="button"
-              onClick={() => reset()}
+              onClick={() => navigate('/portal')}
             />
             <Button label="Edit" variant="secondary" type="submit" />
           </div>
