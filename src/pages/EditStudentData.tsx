@@ -50,7 +50,7 @@ export default function EditStudentData() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-white">
       <div className="w-full max-w-lg bg-white p-8">
-        <h2 className="text-xl font-semibold text-center mb-8">
+        <h2 className="font-poppins font-medium text-2xl leading-[100%] tracking-normal text-center mb-8 text-black">
           Edit Student Data
         </h2>
 

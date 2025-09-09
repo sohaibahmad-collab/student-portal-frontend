@@ -22,11 +22,11 @@ export default function Dropdown({
 
   return (
     <div className="mb-4 w-full">
-      <label className="block text-sm font-medium mb-2">{label}</label>
+          <label className="block mb-1 font-[Noto Sans] font-semibold text-xs leading-[18px] tracking-normal text-[#666666]">{label}</label>
 
       <div className="relative">
         <div
-          className="flex items-center justify-between w-full border rounded-md px-4 py-2 text-sm cursor-pointer bg-white"
+          className="flex items-center justify-between w-full h-10 border border-[#CCCCCC] rounded-lg px-4 py-2 text-sm cursor-pointer bg-white"
           onClick={() => setOpen(!open)}
         >
           <span>{value || placeholder}</span>
@@ -48,11 +48,11 @@ export default function Dropdown({
         </div>
 
         {open && (
-          <div className=" mt-2 border rounded-md bg-white shadow-lg z-10">
+          <div className=" mt-0 border border-[#CCCCCC] rounded-lg bg-white shadow-lg z-10">
             {options.map((option, idx) => (
               <div
                 key={idx}
-                className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                className="px-4 py-2 cursor-pointer  hover:bg-[#4AAA9ACC] hover:text-white"
                 onClick={() => {
                   onChange(option);
                   setOpen(false);
@@ -64,7 +64,9 @@ export default function Dropdown({
           </div>
         )}
       </div>
-      {error && <p className="text-red-500 text-sm mt-1 ">{error}</p>}
+        <p className="font-noto  text-[12px] leading-[18px] tracking-normal text-[#EB5757] mt-1">
+          {error}
+        </p>
     </div>
   );
 }

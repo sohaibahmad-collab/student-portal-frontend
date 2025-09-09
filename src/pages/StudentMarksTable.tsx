@@ -43,7 +43,7 @@ export default function StudentMarksTable() {
       </div>
 
       <div className="bg-white  rounded-md overflow-hidden">
-        <div className="mx-14">
+        <div className="mx-14 overflow-x-auto">
           <table className="w-full text-left ">
             <thead className="border-b bg-white">
               <tr className="border-b-2 border-b-[#F6F6F6]">
