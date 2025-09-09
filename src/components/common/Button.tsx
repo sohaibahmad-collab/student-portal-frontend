@@ -2,6 +2,7 @@ import React from "react";
 import type  { LucideIcon } from "lucide-react";
 
 interface IButtonProps {
+  type?: "button" | "submit" | "reset";
   label: string;
   Icon?: LucideIcon;
   onClick?: () => void;
@@ -12,6 +13,7 @@ interface IButtonProps {
 const Button: React.FC<IButtonProps> = ({
   label,
   Icon,
+  type,
   onClick,
   variant = "primary",
   disabled = false,
@@ -27,9 +29,7 @@ const Button: React.FC<IButtonProps> = ({
     return (
       <button
         onClick={onClick}
-        className={`flex items-center gap-2 px-4 py-2 hover:bg-gray-100 w-full text-sm ${
-          label === "Delete" ? "text-red-500" : ""
-        }`}
+        className="cursor-pointer flex items-center gap-2 px-4 py-2 hover:bg-gray-100 w-full text-sm"
       > 
         <Icon size={16} />
         {label}
@@ -39,9 +39,10 @@ const Button: React.FC<IButtonProps> = ({
 
   return (
     <button
+      type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`rounded-md font-medium transition px-6 py-2 text-sm
+      className={`rounded-md font-medium transition px-6 py-2 text-sm cursor-pointer
         ${variantStyles[variant]}
         ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
     >
