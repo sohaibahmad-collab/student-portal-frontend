@@ -4,7 +4,9 @@ import {
   loginRequest,
   registerRequest,
   logout,
+  setAuthenticated
 } from "@src/redux/slices/authSlice";
+import { isTokenExpired } from "@src/helper/token";
 
 
 export const useAuth = () => {
@@ -20,6 +22,14 @@ export const useAuth = () => {
     dispatch(logout());
   };
 
+  const checkAuthFromToken = () => {
+    const token = localStorage.getItem("authToken");
+    if((token)&&(!isTokenExpired(token))){
+      dispatch(setAuthenticated(true));
+    } else {
+      dispatch(setAuthenticated(false));
+    }
+  };
 
   const register = (name: string, email: string, password: string) => {
     dispatch(registerRequest({ name, email, password }));
@@ -32,5 +42,6 @@ export const useAuth = () => {
     login,
     register,
     handleLogout,
+    checkAuthFromToken
   };
 };

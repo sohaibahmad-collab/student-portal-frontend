@@ -68,6 +68,9 @@ const authSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
+    setAuthenticated: (state, action: PayloadAction<boolean>) => {
+  state.isAuthenticated = action.payload;
+}
   },
 });
 
@@ -79,6 +82,7 @@ export const {
   registerRequest,
   registerSuccess,
   registerFailure,
+  setAuthenticated
 } = authSlice.actions;
 
 export default authSlice.reducer;

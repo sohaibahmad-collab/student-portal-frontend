@@ -39,7 +39,7 @@ export default function Input({
           onChange={(e) => onChange && onChange(e.target.value)}
           className="w-full focus:outline-none text-[#343744] font-[Noto Sans] font-normal text-base leading-6 tracking-normal "
         />
-        {type === "password" ? (
+         {type === "password" && !error ? (
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}

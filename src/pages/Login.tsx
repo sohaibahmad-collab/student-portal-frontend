@@ -9,6 +9,7 @@ import { Mail, Lock } from "lucide-react";
 import { useAuth } from "@src/hooks/useAuth";
 
 
+
 const loginSchema = yup.object().shape({
   email: yup.string().email("Invalid email").required("Email is required"),
   password: yup.string().required("Password is required"),
@@ -21,7 +22,7 @@ interface IFormValues {
 }
 
 export default function Login() {
-  const { login, loading, error, isAuthenticated } = useAuth();
+  const { login, loading, error, isAuthenticated,checkAuthFromToken } = useAuth();
   const navigate = useNavigate();
 
  
@@ -38,6 +39,10 @@ export default function Login() {
   const onSubmit = (data: IFormValues) => {
     login(data.email, data.password);
   };
+  
+  useEffect(() => {
+    checkAuthFromToken(); 
+  }, []);
 
  
   useEffect(() => {

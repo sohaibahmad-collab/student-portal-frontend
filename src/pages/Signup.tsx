@@ -15,6 +15,7 @@ export default function SignUp() {
     formState: { errors },
   } = useForm<SignUpFormData>({
     resolver: yupResolver(signUpSchema),
+     mode: "onSubmit"
   });
 
   const onSubmit = (data: SignUpFormData) => {
