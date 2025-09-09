@@ -1,46 +1,18 @@
 import Button from "@src/components/common/Button";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import SummaryCard from "@src/components/common/SummaryCard";
 import StudentRow from "@src/components/StudentRow";
 import { useNavigate } from "react-router-dom";
 import { useStudents } from "@src/hooks/useStudents";
+import { useStudentStats } from "@src/hooks/useStudentStats";
 export default function StudentMarksTable() {
   const { items, fetchStudents } = useStudents();
-  const grades = ["A+", "A-", "B+", "B-", "F"];
-  const gradeRank = (grade: string) => grades.indexOf(grade);
-  const [topGrade, setTopGrade] = useState("");
-  const [lowestGrade, setLowestGrade] = useState("");
-  const [mostPassed, setMostPassed] = useState("");
-  const [mostFailed, setMostFailed] = useState("");
+  const { topGrade, lowestGrade, mostPassed, mostFailed } = useStudentStats();
 
   useEffect(() => {
     fetchStudents();
   }, []);
 
-  useEffect(() => {
-    if (items.length === 0) return;
-
-    const topGradeItem = items.reduce((prev, curr) =>
-      gradeRank(curr.grade) < gradeRank(prev.grade) ? curr : prev
-    ).grade;
-
-    const lowestGradeItem = items.reduce((prev, curr) =>
-      gradeRank(curr.grade) > gradeRank(prev.grade) ? curr : prev
-    ).grade;
-
-    const mostPassedSubject = items.reduce((prev, curr) =>
-      curr.marks > prev.marks ? curr : prev
-    ).subject;
-
-    const mostFailedSubject = items.reduce((prev, curr) =>
-      curr.marks < prev.marks ? curr : prev
-    ).subject;
-
-    setTopGrade(topGradeItem);
-    setLowestGrade(lowestGradeItem);
-    setMostPassed(mostPassedSubject);
-    setMostFailed(mostFailedSubject);
-  }, [items]);
   const navigate = useNavigate();
 
   return (
