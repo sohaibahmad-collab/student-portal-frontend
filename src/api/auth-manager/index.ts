@@ -24,7 +24,7 @@ class AuthApiClient extends baseApiClass {
     return this.post<IAuthUser>(
       `${AuthApiClient.resourceUrl}/login`,
       data,
-      false // no auth required
+      false 
     );
   }
 
