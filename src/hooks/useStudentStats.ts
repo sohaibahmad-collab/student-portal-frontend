@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { useStudents } from "./useStudents";
+import { useStudents } from "@src/hooks/useStudents";
 import { grades } from "@src/constants/academic";
 
 const gradeRank = (grade: string) => grades.indexOf(grade);
 
 export function useStudentStats() {
-  const {items} =useStudents()
+  const {items} =useStudents() //get direct 
   const [topGrade, setTopGrade] = useState("");
   const [lowestGrade, setLowestGrade] = useState("");
   const [mostPassed, setMostPassed] = useState("");

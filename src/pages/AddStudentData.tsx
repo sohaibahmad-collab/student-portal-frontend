@@ -32,6 +32,7 @@ export default function AddStudentData() {
   const onSubmit = (data: IFormValues) => {
     addStudent(data);
     reset();
+    navigate("/portal")
   };
 
   return (

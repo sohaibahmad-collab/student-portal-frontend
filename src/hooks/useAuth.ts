@@ -3,6 +3,7 @@ import type { RootState, AppDispatch } from "@src/redux/store";
 import {
   loginRequest,
   registerRequest,
+  logout,
 } from "@src/redux/slices/authSlice";
 
 
@@ -14,6 +15,11 @@ export const useAuth = () => {
   const login = (email: string, password: string) => {
     dispatch(loginRequest({ email, password }));
   };
+  
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
 
   const register = (name: string, email: string, password: string) => {
     dispatch(registerRequest({ name, email, password }));
@@ -25,5 +31,6 @@ export const useAuth = () => {
     ...authState, 
     login,
     register,
+    handleLogout,
   };
 };

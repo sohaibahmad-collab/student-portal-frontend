@@ -1,10 +1,11 @@
 import axios, { type AxiosInstance, type AxiosResponse } from "axios";
-
+import { API_BASE_URL } from "@src/config";
 export default class baseApiClass {
   protected api: AxiosInstance;
 
-  constructor() {
+  constructor(baseURL: string = API_BASE_URL) {
     this.api = axios.create({
+      baseURL,
       headers: {
         "Content-Type": "application/json",
       },

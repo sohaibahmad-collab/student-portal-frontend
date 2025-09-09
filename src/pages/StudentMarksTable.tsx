@@ -5,8 +5,10 @@ import StudentRow from "@src/components/StudentRow";
 import { useNavigate } from "react-router-dom";
 import { useStudents } from "@src/hooks/useStudents";
 import { useStudentStats } from "@src/hooks/useStudentStats";
+import { useAuth } from "@src/hooks/useAuth";
 export default function StudentMarksTable() {
   const { items, fetchStudents } = useStudents();
+  const { handleLogout } = useAuth();
   const { topGrade, lowestGrade, mostPassed, mostFailed } = useStudentStats();
 
   useEffect(() => {
@@ -17,13 +19,28 @@ export default function StudentMarksTable() {
 
   return (
     <div className="min-h-screen w-full bg-white ">
-      <h1 className="font-poppins font-medium text-2xl leading-[100%] tracking-[0%] text-black mb-8 ml-16 mt-9 ">
-        Student Portal
-      </h1>
+      <div className="flex justify-between mx-14">
+        <h1
+          className="font-poppins font-medium text-2xl leading-[100%] tracking-[0%] text-black mb-8 
+       mt-9 "
+        >
+          Student Portal
+        </h1>
+        <div className="h-10 mt-8">
+          <Button
+            label="log out"
+            variant="primary"
+            onClick={() => {
+              handleLogout();
+              navigate("/portal");
+            }}
+          />
+        </div>
+      </div>
       <div className="absolute w-full h-[2px] top-[80px] bg-[background:#E8ECF5] "></div>
       <div className="mx-14">
         <div className="flex justify-between mb-3 ">
-          <label className="py-4 px-3 ml-0 font-poppins font-medium text-lg leading-[100%] tracking-[0%] text-[#2E3136]">
+          <label className="py-4  ml-0 font-poppins font-medium text-lg leading-[100%] tracking-[0%] text-[#2E3136]">
             Students summary
           </label>
           <Button

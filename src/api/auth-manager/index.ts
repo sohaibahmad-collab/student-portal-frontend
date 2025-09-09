@@ -1,5 +1,5 @@
 import baseApiClass from "@src/api/baseApiClass";
-import { API_BASE_URL, API_URL_PATHS } from "@src/config";
+import {  API_URL_PATHS } from "@src/config";
 
 export interface IAuthUser {
   token: string;
@@ -17,12 +17,12 @@ export interface IRegisterPayload {
 }
 
 class AuthApiClient extends baseApiClass {
-  private static resourceUrl = API_BASE_URL + API_URL_PATHS.auth;
+  private static resourcePath = API_URL_PATHS.auth;
 
 
   public async login(data: ILoginPayload): Promise<IAuthUser> {
     return this.post<IAuthUser>(
-      `${AuthApiClient.resourceUrl}/login`,
+      `${AuthApiClient.resourcePath}/login`,
       data,
       false 
     );
@@ -30,7 +30,7 @@ class AuthApiClient extends baseApiClass {
 
   public async register(data: IRegisterPayload): Promise<IAuthUser> {
     return this.post<IAuthUser>(
-      `${AuthApiClient.resourceUrl}/register`,
+      `${AuthApiClient.resourcePath}/register`,
       data,
       false 
     );

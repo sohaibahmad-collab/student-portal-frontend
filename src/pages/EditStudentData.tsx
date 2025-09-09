@@ -45,6 +45,7 @@ export default function EditStudentData() {
   const onSubmit = (data: IFormValues) => {
     updateStudent(id as string,data);
     reset();
+    navigate("/portal")
   };
 
   return (
@@ -129,7 +130,7 @@ export default function EditStudentData() {
               type="button"
               onClick={() => navigate('/portal')}
             />
-            <Button label="Edit" variant="secondary" type="submit" />
+            <Button label="Save" variant="secondary" type="submit" />
           </div>
         </form>
       </div>

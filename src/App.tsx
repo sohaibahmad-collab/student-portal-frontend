@@ -5,11 +5,10 @@ import AddStudentData from "@src/pages/AddStudentData";
 import { Routes, Route } from "react-router-dom";
 import ToastContainar from "@src/components/common/ToastContainer";
 import EditStudentData from "@src/pages/EditStudentData";
-import { useAuth } from "@src/hooks/useAuth";
-import { Navigate } from "react-router-dom";
+import { DropdownProvider } from "@src/context/DropdownContext";
+import PrivateRoute from "@src/components/common/PrivateRoute"; 
 
 function App() {
-  const { isAuthenticated } = useAuth();
   return (
     <>
       <Routes>
@@ -18,23 +17,27 @@ function App() {
         <Route
           path="/portal"
           element={
-            isAuthenticated ? (
-              <StudentMarksTable />
-            ) : (
-              <Navigate to="/" replace />
-            )
+            <PrivateRoute>
+              <DropdownProvider>
+                <StudentMarksTable />
+              </DropdownProvider>
+            </PrivateRoute>
           }
         />
         <Route
           path="/add-student"
           element={
-            isAuthenticated ? <AddStudentData /> : <Navigate to="/" replace />
+            <PrivateRoute>
+              <AddStudentData />
+            </PrivateRoute>
           }
         />
         <Route
           path="/edit-student/:id"
           element={
-            isAuthenticated ? <EditStudentData /> : <Navigate to="/" replace />
+            <PrivateRoute>
+              <EditStudentData />
+            </PrivateRoute>
           }
         />
       </Routes>

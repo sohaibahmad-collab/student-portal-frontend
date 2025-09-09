@@ -64,7 +64,7 @@ export default function Login() {
                   placeholder="Enter your email"
                   type="email"
                   Icon={Mail}
-                
+                  error={errors.email?.message}
                 />
               )}
             />
@@ -80,7 +80,7 @@ export default function Login() {
                   placeholder="Enter your password"
                   type="password"
                   Icon={Lock}
-                
+                  error={errors.password?.message}
                 />
               )}
             />
