@@ -1,18 +1,17 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { IUser } from "@src/types/user";
 import { isTokenExpired } from "@src/helper/token";
+
 interface IAuthState {
   user: IUser | null;
   loading: boolean;
   error: string | null;
-  isAuthenticated: boolean;
 }
 
 const initialState: IAuthState = {
   user: null,
   loading: false,
   error: null,
-  isAuthenticated: false,
 };
 
 const authSlice = createSlice({
@@ -31,12 +30,10 @@ const authSlice = createSlice({
 
       if (isTokenExpired(token)) {
         state.error = "Session expired. Please login again.";
-        state.isAuthenticated = false;
         state.user = null;
         localStorage.removeItem("authToken");
       } else {
         state.user = action.payload;
-        state.isAuthenticated = true;
         localStorage.setItem("authToken", token);
       }
 
@@ -46,8 +43,7 @@ const authSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
-    logout: (state) => {
-      state.isAuthenticated = false;
+    logout: () => {
       localStorage.removeItem("authToken");
     },
 
@@ -60,7 +56,6 @@ const authSlice = createSlice({
     },
     registerSuccess: (state, action: PayloadAction<IUser>) => {
       state.user = action.payload;
-      state.isAuthenticated = false;
       state.loading = false;
       localStorage.setItem("authToken", action.payload.token);
     },
@@ -68,9 +63,6 @@ const authSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
-    setAuthenticated: (state, action: PayloadAction<boolean>) => {
-  state.isAuthenticated = action.payload;
-}
   },
 });
 
@@ -82,7 +74,6 @@ export const {
   registerRequest,
   registerSuccess,
   registerFailure,
-  setAuthenticated
 } = authSlice.actions;
 
 export default authSlice.reducer;

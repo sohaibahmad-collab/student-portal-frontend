@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import { useStudents } from "@src/hooks/useStudents";
 import { grades } from "@src/constants/academic";
+import {useSelector } from "react-redux";
+import type { RootState } from "@src/redux/store";
 
 const gradeRank = (grade: string) => grades.indexOf(grade);
 
 export function useStudentStats() {
-  const {items} =useStudents() //get direct 
+  const { items} = useSelector(
+    (state: RootState) => state.studentsSlice
+  );
   const [topGrade, setTopGrade] = useState("");
   const [lowestGrade, setLowestGrade] = useState("");
   const [mostPassed, setMostPassed] = useState("");

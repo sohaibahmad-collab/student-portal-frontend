@@ -1,10 +1,12 @@
 import GradeBadge from "@src/components/common/GradeBadge";
 import Button from "@src/components/common/Button";
 import type { IStudententry } from "@src/types/studentEntry";
-import { MoreVertical, Edit, Trash } from "lucide-react";
+import { MoreVertical} from "lucide-react";
 import { useStudents } from "@src/hooks/useStudents";
 import { useNavigate } from "react-router-dom";
 import { useDropdown } from "@src/context/DropdownContext";
+import Subtract from "@src/assets/Subtract.png"
+import Trash from "@src/assets/Trash.png"
 
 
 const StudentRow: React.FC<IStudententry> = ({_id,grade,date,time,name,marks,subject}:IStudententry) => {
@@ -34,8 +36,9 @@ const StudentRow: React.FC<IStudententry> = ({_id,grade,date,time,name,marks,sub
         />
         {openRow===_id && (
           <div className="absolute right-0 top-0 mt-0 w-32 bg-white  z-300">
-            <Button Icon={Edit} label="Edit" onClick={()=>navigate(`/edit-student/${_id}`)} />
-            <Button Icon={Trash} label="Delete" onClick={()=>deleteStudent(_id)}/>
+            <Button image={Subtract} label="Edit" onClick={()=>navigate(`/edit-student/${_id}`)} />
+            <Button image={Trash} label="Delete" onClick={()=>deleteStudent(_id)}/>
+            
           </div>
         )}
       </td>

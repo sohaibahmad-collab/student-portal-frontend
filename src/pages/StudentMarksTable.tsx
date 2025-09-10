@@ -6,8 +6,14 @@ import { useNavigate } from "react-router-dom";
 import { useStudents } from "@src/hooks/useStudents";
 import { useStudentStats } from "@src/hooks/useStudentStats";
 import { useAuth } from "@src/hooks/useAuth";
+import type { RootState } from "@src/redux/store";
+import {useSelector } from "react-redux";
+
 export default function StudentMarksTable() {
-  const { items, fetchStudents } = useStudents();
+  const {fetchStudents } = useStudents();
+    const { items} = useSelector(
+    (state: RootState) => state.studentsSlice
+  );
   const { handleLogout } = useAuth();
   const { topGrade, lowestGrade, mostPassed, mostFailed } = useStudentStats();
 
@@ -32,7 +38,7 @@ export default function StudentMarksTable() {
             variant="primary"
             onClick={() => {
               handleLogout();
-              navigate("/portal");
+              navigate("/");
             }}
           />
         </div>

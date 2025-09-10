@@ -11,7 +11,7 @@ import AuthApiClient from "@src/api/auth-manager";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { IAuthUser } from "@src/api/auth-manager";
 import { toast } from "react-toastify";
-
+;
 
 function* handleLogin(action: PayloadAction<{ email: string; password: string }>) {
   try {

@@ -1,5 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "@src/redux/store";
+import { useDispatch } from "react-redux";
 
 import {
   fetchStudentsRequest,
@@ -11,10 +10,6 @@ import type { IStudententry } from "@src/types/studentEntry";
 
 export const useStudents = () => {
   const dispatch = useDispatch();
-
-  const { items, loading, error } = useSelector(
-    (state: RootState) => state.studentsSlice
-  );
 
   const fetchStudents = () => {
     dispatch(fetchStudentsRequest());
@@ -53,9 +48,6 @@ export const useStudents = () => {
   };
 
   return {
-    items,
-    loading,
-    error,
     fetchStudents,
     addStudent,
     updateStudent,

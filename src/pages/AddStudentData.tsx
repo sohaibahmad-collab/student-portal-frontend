@@ -113,11 +113,11 @@ export default function AddStudentData() {
           <div className="flex justify-between pt-4">
             <Button
               label="Cancel"
-              variant="primary"
+              variant="dirtygreen"
               type="button"
               onClick={() => navigate("/portal")}
             />
-            <Button label="Add" variant="secondary" type="submit" />
+            <Button label="Add" variant="primary" type="submit" />
           </div>
         </form>
       </div>

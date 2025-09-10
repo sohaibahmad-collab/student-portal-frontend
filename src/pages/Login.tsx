@@ -7,14 +7,15 @@ import Input from "@src/components/common/Input";
 import { useNavigate } from "react-router-dom";
 import { Mail, Lock } from "lucide-react";
 import { useAuth } from "@src/hooks/useAuth";
-
-
+import { useSelector } from "react-redux";
+import type { RootState } from "@src/redux/store";
+import { useAuthCheck } from "@src/hooks/useAuthCheck";
+// import { useAuthCheck } from "@src/context/AuthContext";
 
 const loginSchema = yup.object().shape({
   email: yup.string().email("Invalid email").required("Email is required"),
   password: yup.string().required("Password is required"),
 });
-
 
 interface IFormValues {
   email: string;
@@ -22,10 +23,11 @@ interface IFormValues {
 }
 
 export default function Login() {
-  const { login, loading, error, isAuthenticated,checkAuthFromToken } = useAuth();
+  const { login } = useAuth();
+  const { loading, error } = useSelector((state: RootState) => state.authSlice);
+  const { isAuthenticated } = useAuthCheck();
   const navigate = useNavigate();
 
- 
   const {
     control,
     handleSubmit,
@@ -35,18 +37,12 @@ export default function Login() {
     defaultValues: { email: "", password: "" },
   });
 
- 
-  const onSubmit = (data: IFormValues) => {
-    login(data.email, data.password);
+  const onSubmit = async (data: IFormValues) => {
+    await login(data.email, data.password);
   };
-  
-  useEffect(() => {
-    checkAuthFromToken(); 
-  }, []);
 
- 
   useEffect(() => {
-    if (isAuthenticated) navigate("/portal");
+    if (isAuthenticated === true) navigate("/portal");
   }, [isAuthenticated, navigate]);
 
   return (
@@ -58,7 +54,6 @@ export default function Login() {
           </h2>
 
           <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
-          
             <Controller
               name="email"
               control={control}
@@ -74,7 +69,6 @@ export default function Login() {
               )}
             />
 
-         
             <Controller
               name="password"
               control={control}
@@ -90,7 +84,6 @@ export default function Login() {
               )}
             />
 
-            
             {error && <p className="text-red-500 text-sm">{error}</p>}
 
             <div className="flex justify-center">

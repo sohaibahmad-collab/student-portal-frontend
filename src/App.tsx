@@ -11,6 +11,7 @@ import PrivateRoute from "@src/components/common/PrivateRoute";
 function App() {
   return (
     <>
+     
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
@@ -42,6 +43,7 @@ function App() {
         />
       </Routes>
       <ToastContainar />
+     
     </>
   );
 }

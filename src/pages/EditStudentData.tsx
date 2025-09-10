@@ -9,11 +9,14 @@ import { studentFormSchema } from "@src/schema/studentFormSchema";
 import { useParams} from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { subjects, grades } from "@src/constants/academic";
+import { useSelector } from "react-redux";
+import type { RootState } from "@src/redux/store";
 
 
 export default function EditStudentData() {
   const navigate=useNavigate();
-  const { updateStudent,items } = useStudents();
+  const {items} = useSelector((state: RootState)=> state?.studentsSlice)
+  const { updateStudent} = useStudents();
 
   const { id }=useParams<{ id: string }>()
   
@@ -126,11 +129,11 @@ export default function EditStudentData() {
           <div className="flex justify-between pt-4">
             <Button
               label="Cancel"
-              variant="primary"
+              variant="dirtygreen"
               type="button"
               onClick={() => navigate('/portal')}
             />
-            <Button label="Save" variant="secondary" type="submit" />
+            <Button label="Save" variant="primary" type="submit" />
           </div>
         </form>
       </div>
