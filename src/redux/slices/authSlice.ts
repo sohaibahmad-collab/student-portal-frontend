@@ -18,6 +18,8 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+
+
     loginRequest: (
       state,
       _action: PayloadAction<{ email: string; password: string }>
@@ -25,6 +27,7 @@ const authSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
+   
     loginSuccess: (state, action: PayloadAction<IUser>) => {
       const token = action.payload.token;
 
@@ -56,6 +59,7 @@ const authSlice = createSlice({
     },
     registerSuccess: (state, action: PayloadAction<IUser>) => {
       state.user = action.payload;
+      state.error="no error"
       state.loading = false;
       localStorage.setItem("authToken", action.payload.token);
     },
@@ -63,6 +67,10 @@ const authSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
+     stopLoading: (state) => {
+      state.loading = false;
+    },
+     
   },
 });
 
@@ -74,6 +82,7 @@ export const {
   registerRequest,
   registerSuccess,
   registerFailure,
+  stopLoading
 } = authSlice.actions;
 
 export default authSlice.reducer;

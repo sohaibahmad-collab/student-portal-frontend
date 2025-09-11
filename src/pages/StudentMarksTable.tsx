@@ -6,14 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { useStudents } from "@src/hooks/useStudents";
 import { useStudentStats } from "@src/hooks/useStudentStats";
 import { useAuth } from "@src/hooks/useAuth";
-import type { RootState } from "@src/redux/store";
-import {useSelector } from "react-redux";
+
 
 export default function StudentMarksTable() {
-  const {fetchStudents } = useStudents();
-    const { items} = useSelector(
-    (state: RootState) => state.studentsSlice
-  );
+  const {fetchStudents,items} = useStudents();
   const { handleLogout } = useAuth();
   const { topGrade, lowestGrade, mostPassed, mostFailed } = useStudentStats();
 
@@ -25,7 +21,7 @@ export default function StudentMarksTable() {
 
   return (
     <div className="min-h-screen w-full bg-white ">
-      <div className="flex justify-between mx-14">
+      <div className="flex justify-between mx-14 ">
         <h1
           className="font-poppins font-medium text-2xl leading-[100%] tracking-[0%] text-black mb-8 
        mt-9 "
@@ -44,7 +40,7 @@ export default function StudentMarksTable() {
         </div>
       </div>
       <div className="absolute w-full h-[2px] top-[80px] bg-[background:#E8ECF5] "></div>
-      <div className="mx-14">
+      <div className="mx-14 ">
         <div className="flex justify-between mb-3 ">
           <label className="py-4  ml-0 font-poppins font-medium text-lg leading-[100%] tracking-[0%] text-[#2E3136]">
             Students summary
@@ -56,7 +52,7 @@ export default function StudentMarksTable() {
           />
         </div>
       </div>
-      <div className="mx-14">
+      <div className="mx-14 ">
         <div className="w-full flex justify-between flex-row flex-wrap mb-6">
           <SummaryCard title="Top Grade" value={topGrade} color="green" />
           <SummaryCard title="Most Passed" value={mostPassed} color="green" />
@@ -66,7 +62,7 @@ export default function StudentMarksTable() {
       </div>
 
       <div className="bg-white  rounded-md overflow-hidden">
-        <div className="mx-14 overflow-x-auto">
+        <div className="mx-14 overflow-x-auto ">
           <table className="w-full text-left ">
             <thead className="border-b bg-white">
               <tr className="border-b-2 border-b-[#F6F6F6]">
@@ -91,7 +87,7 @@ export default function StudentMarksTable() {
               </tr>
             </thead>
             <tbody>
-              {items.map((s) => (
+              {items?.map((s) => (
                 <StudentRow key={s._id} {...s} />
               ))}
             </tbody>

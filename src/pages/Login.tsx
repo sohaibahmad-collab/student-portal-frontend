@@ -7,10 +7,7 @@ import Input from "@src/components/common/Input";
 import { useNavigate } from "react-router-dom";
 import { Mail, Lock } from "lucide-react";
 import { useAuth } from "@src/hooks/useAuth";
-import { useSelector } from "react-redux";
-import type { RootState } from "@src/redux/store";
 import { useAuthCheck } from "@src/hooks/useAuthCheck";
-// import { useAuthCheck } from "@src/context/AuthContext";
 
 const loginSchema = yup.object().shape({
   email: yup.string().email("Invalid email").required("Email is required"),
@@ -23,10 +20,15 @@ interface IFormValues {
 }
 
 export default function Login() {
-  const { login } = useAuth();
-  const { loading, error } = useSelector((state: RootState) => state.authSlice);
+  const { login, loading, stop_Loading } = useAuth();
   const { isAuthenticated } = useAuthCheck();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    stop_Loading();
+  }, []);
+
+   
 
   const {
     control,
@@ -38,7 +40,7 @@ export default function Login() {
   });
 
   const onSubmit = async (data: IFormValues) => {
-    await login(data.email, data.password);
+    login(data.email, data.password);
   };
 
   useEffect(() => {
@@ -83,8 +85,6 @@ export default function Login() {
                 />
               )}
             />
-
-            {error && <p className="text-red-500 text-sm">{error}</p>}
 
             <div className="flex justify-center">
               <Button

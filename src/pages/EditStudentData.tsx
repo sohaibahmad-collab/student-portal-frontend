@@ -6,22 +6,33 @@ import Button from "@src/components/common/Button";
 import { useStudents } from "@src/hooks/useStudents";
 import type { IFormValues } from "@src/types/formValues";
 import { studentFormSchema } from "@src/schema/studentFormSchema";
-import { useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { subjects, grades } from "@src/constants/academic";
-import { useSelector } from "react-redux";
-import type { RootState } from "@src/redux/store";
-
+import { useEffect } from "react";
 
 export default function EditStudentData() {
-  const navigate=useNavigate();
-  const {items} = useSelector((state: RootState)=> state?.studentsSlice)
-  const { updateStudent} = useStudents();
+  const navigate = useNavigate();
+  const { updateStudent, fetchStudents,items } = useStudents();
 
-  const { id }=useParams<{ id: string }>()
-  
- const student= items.find((s) => s._id === id);
-   
+  const { id } = useParams<{ id: string }>();
+
+  const student = items.find((s) => s._id === id);
+
+  useEffect(() => {
+    fetchStudents();
+  }, []);
+
+  useEffect(() => {
+    if (student) {
+      reset({
+        name: student.name,
+        marks: student.marks,
+        subject: student.subject,
+        grade: student.grade,
+      });
+    }
+  }, [items]);
 
   const {
     control,
@@ -30,25 +41,25 @@ export default function EditStudentData() {
     formState: { errors },
   } = useForm<IFormValues>({
     resolver: yupResolver(studentFormSchema),
-   defaultValues: student
-    ? {
-        name: student.name,
-        marks: student.marks,
-        subject: student.subject,
-        grade: student.grade,
-      }
-    : {
-        name: "",
-        marks: 0,
-        subject: "",
-        grade: "",
-      },
+    defaultValues: student
+      ? {
+          name: student.name,
+          marks: student.marks,
+          subject: student.subject,
+          grade: student.grade,
+        }
+      : {
+          name: "",
+          marks: 0,
+          subject: "",
+          grade: "",
+        },
   });
 
   const onSubmit = (data: IFormValues) => {
-    updateStudent(id as string,data);
+    updateStudent(id as string, data);
     reset();
-    navigate("/portal")
+    navigate("/portal");
   };
 
   return (
@@ -69,7 +80,7 @@ export default function EditStudentData() {
                   placeholder="Enter name"
                   value={field.value}
                   onChange={(val) => field.onChange(val)}
-                   error={errors.name?.message}
+                  error={errors.name?.message}
                 />
               </div>
             )}
@@ -86,7 +97,7 @@ export default function EditStudentData() {
                   placeholder="Enter Marks"
                   value={field.value?.toString() ?? ""}
                   onChange={(val) => field.onChange(Number(val))}
-                   error={errors.marks?.message}
+                  error={errors.marks?.message}
                 />
               </div>
             )}
@@ -103,7 +114,7 @@ export default function EditStudentData() {
                   options={subjects}
                   placeholder="Select Subject"
                   onChange={field.onChange}
-                   error={errors.subject?.message}
+                  error={errors.subject?.message}
                 />
               </div>
             )}
@@ -120,7 +131,7 @@ export default function EditStudentData() {
                   options={grades}
                   placeholder="Select Grade"
                   onChange={field.onChange}
-                   error={errors.grade?.message}
+                  error={errors.grade?.message}
                 />
               </div>
             )}
@@ -131,7 +142,7 @@ export default function EditStudentData() {
               label="Cancel"
               variant="dirtygreen"
               type="button"
-              onClick={() => navigate('/portal')}
+              onClick={() => navigate("/portal")}
             />
             <Button label="Save" variant="primary" type="submit" />
           </div>

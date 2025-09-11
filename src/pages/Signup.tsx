@@ -4,23 +4,37 @@ import Input from "@src/components/common/Input";
 import { Mail, Lock, User } from "lucide-react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { signUpSchema, type SignUpFormData } from "@src/schema/signUpFormSchema";
+import {
+  signUpSchema,
+  type SignUpFormData,
+} from "@src/schema/signUpFormSchema";
 import { useAuth } from "@src/hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function SignUp() {
-   const {register}=useAuth()
+  const navigate = useNavigate();
+  const { register, loading, error } = useAuth();
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<SignUpFormData>({
     resolver: yupResolver(signUpSchema),
-     mode: "onSubmit"
+    mode: "onSubmit",
   });
 
+  useEffect(() => {
+  if (error === null) return; 
+
+  if (error==="no error") {
+    navigate("/");
+  }
+}, [error, navigate]);
+
   const onSubmit = (data: SignUpFormData) => {
-     const {name,email,password} =data
-     register(name,email,password)
+    const { name, email, password } = data;
+    register(name, email, password);
   };
 
   return (
@@ -32,7 +46,6 @@ export default function SignUp() {
           </h2>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-           
             <div className="relative">
               <Controller
                 name="name"
@@ -44,14 +57,13 @@ export default function SignUp() {
                     placeholder="Enter your name"
                     type="text"
                     value={field.value}
-                    onChange={(val) => field.onChange(val)} 
+                    onChange={(val) => field.onChange(val)}
                     error={errors.name?.message}
                   />
                 )}
               />
             </div>
 
-           
             <div>
               <Controller
                 name="email"
@@ -64,13 +76,12 @@ export default function SignUp() {
                     type="email"
                     value={field.value}
                     onChange={(val) => field.onChange(val)}
-                     error={errors.email?.message}
+                    error={errors.email?.message}
                   />
                 )}
               />
             </div>
 
-           
             <div>
               <Controller
                 name="password"
@@ -83,13 +94,12 @@ export default function SignUp() {
                     type="password"
                     value={field.value}
                     onChange={(val) => field.onChange(val)}
-                     error={errors.password?.message}
+                    error={errors.password?.message}
                   />
                 )}
               />
             </div>
 
-           
             <div>
               <Controller
                 name="confirmPassword"
@@ -109,7 +119,12 @@ export default function SignUp() {
             </div>
 
             <div className="flex justify-center">
-              <Button label="Sign Up" variant="primary" type="submit" />
+              <Button
+                variant="primary"
+                type="submit"
+                label={loading ? "Signing Up..." : "Sign Up"}
+                disabled={loading}
+              />
             </div>
           </form>
 

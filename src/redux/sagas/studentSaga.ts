@@ -16,7 +16,7 @@ import {
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { IStudententry } from "@src/types/studentEntry";
 import StudentApiClient from "@src/api/student-manager";
-import { toast } from "react-toastify";  // ✅ correct import
+import { toast } from "react-toastify";  
 
 
 function* fetchStudentsSaga() {
@@ -25,7 +25,7 @@ function* fetchStudentsSaga() {
       [StudentApiClient, StudentApiClient.getStudents]
     );
     yield put(fetchStudentsSuccess(response));
-    toast.success("Students fetched successfully 🎉");
+    // toast.success("Students fetched successfully 🎉");
   } catch (error: any) {
     const message = error.message || "Failed to fetch students";
     yield put(fetchStudentsFailure(message));

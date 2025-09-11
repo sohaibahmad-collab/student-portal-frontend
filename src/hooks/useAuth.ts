@@ -1,19 +1,25 @@
-import { useDispatch } from "react-redux";
-import type { AppDispatch } from "@src/redux/store";
+import { useDispatch,useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "@src/redux/store";
 import {
   loginRequest,
   registerRequest,
   logout,
+  stopLoading
 } from "@src/redux/slices/authSlice";
 
 
 
 export const useAuth = () => {
   const dispatch: AppDispatch = useDispatch();
+    const { loading, error } = useSelector((state: RootState) => state.authSlice);
 
   const login = (email: string, password: string) => {
     dispatch(loginRequest({ email, password }));
   };
+
+  const stop_Loading =()=>{
+    dispatch(stopLoading())
+  }
   
   const handleLogout = () => {
     dispatch(logout());
@@ -29,6 +35,9 @@ export const useAuth = () => {
   return {
     login,
     register,
-    handleLogout
+    handleLogout,
+    stop_Loading,
+    loading,
+    error
   };
 };

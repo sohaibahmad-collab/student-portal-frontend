@@ -8,11 +8,15 @@ import type { IFormValues } from "@src/types/formValues";
 import { studentFormSchema } from "@src/schema/studentFormSchema";
 import { useNavigate } from "react-router-dom";
 import { subjects, grades } from "@src/constants/academic";
+import { useEffect } from "react";
 
 export default function AddStudentData() {
-  const { addStudent } = useStudents();
-  const navigate = useNavigate();
 
+  const { addStudent,fetchStudents } = useStudents();
+  const navigate = useNavigate();
+    useEffect(() => {
+      fetchStudents();
+    }, []);
   
   const {
     control,
