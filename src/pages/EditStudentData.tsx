@@ -16,9 +16,10 @@ export default function EditStudentData() {
   const { updateStudent, fetchStudents,items } = useStudents();
 
   const { id } = useParams<{ id: string }>();
+  
 
-  const student = items.find((s) => s._id === id);
-
+  const student = items.find((s) => s.id == id);
+  console.log(items)
   useEffect(() => {
     fetchStudents();
   }, []);
@@ -61,7 +62,6 @@ export default function EditStudentData() {
     reset();
     navigate("/portal");
   };
-
   return (
     <div className="flex items-center justify-center min-h-screen bg-white">
       <div className="w-full max-w-lg bg-white p-8">

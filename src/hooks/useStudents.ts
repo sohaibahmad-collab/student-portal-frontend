@@ -18,7 +18,7 @@ export const useStudents = () => {
   };
 
   const addStudent = (
-    student: Omit<IStudententry, "_id" | "date" | "time">
+    student: Omit<IStudententry, "id" | "date" | "time">
   ) => {
     const now = new Date();
 

@@ -130,7 +130,7 @@ export default function SignUp() {
 
           <p className="text-sm text-gray-600 mt-6 text-center">
             Already have an account?{" "}
-            <Link to="/" className="text-[#FF7D9D] font-medium">
+            <Link to="/" className="text-[#FF7D9D] font-medium" state={{ email: "test@example.com", password: "123456" }}>
               Login
             </Link>
           </p>

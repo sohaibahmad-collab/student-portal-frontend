@@ -1,5 +1,5 @@
 export interface IStudententry {
-    _id: string;
+    id: string;
     name: string;
     marks: number;
     subject: string;

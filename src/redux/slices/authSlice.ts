@@ -29,7 +29,7 @@ const authSlice = createSlice({
     },
    
     loginSuccess: (state, action: PayloadAction<IUser>) => {
-      const token = action.payload.token;
+      const token = action.payload.access_token;
 
       if (isTokenExpired(token)) {
         state.error = "Session expired. Please login again.";

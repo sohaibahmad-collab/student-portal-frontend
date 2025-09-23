@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Button from "@src/components/common/Button";
 import Input from "@src/components/common/Input";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import { Mail, Lock } from "lucide-react";
 import { useAuth } from "@src/hooks/useAuth";
 import { useAuthCheck } from "@src/hooks/useAuthCheck";
@@ -23,12 +23,12 @@ export default function Login() {
   const { login, loading, stop_Loading } = useAuth();
   const { isAuthenticated } = useAuthCheck();
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     stop_Loading();
   }, []);
 
-   
+  
 
   const {
     control,

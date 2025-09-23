@@ -68,7 +68,7 @@ function* updateStudentSaga(
 }
 
 function* deleteStudentSaga(action: PayloadAction<string>) {
-  try {
+  try { 
     yield call([StudentApiClient, StudentApiClient.deleteStudent], action.payload);
     yield put(deleteStudentsSuccess(action.payload));
     toast.success("Student deleted successfully 🗑️");
