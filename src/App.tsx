@@ -7,6 +7,7 @@ import ToastContainar from "@src/components/common/ToastContainer";
 import EditStudentData from "@src/pages/EditStudentData";
 import { DropdownProvider } from "@src/context/DropdownContext";
 import PrivateRoute from "@src/components/common/PrivateRoute"; 
+import NotFound from "@src/pages/NotFound";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <ToastContainar />
      

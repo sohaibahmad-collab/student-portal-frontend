@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Button from "@src/components/common/Button";
 import Input from "@src/components/common/Input";
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { Mail, Lock } from "lucide-react";
 import { useAuth } from "@src/hooks/useAuth";
 import { useAuthCheck } from "@src/hooks/useAuthCheck";
@@ -20,13 +20,17 @@ interface IFormValues {
 }
 
 export default function Login() {
-  const { login, loading, stop_Loading } = useAuth();
+  const { login, loading, stop_Loading,prefilledEmail } = useAuth();
   const { isAuthenticated } = useAuthCheck();
   const navigate = useNavigate();
+
+
+
+  // useEffect(() => {
+  //   stop_Loading();
+  // }, []);
+
   
-  useEffect(() => {
-    stop_Loading();
-  }, []);
 
   
 
@@ -34,19 +38,32 @@ export default function Login() {
     control,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm<IFormValues>({
     resolver: yupResolver(loginSchema),
     defaultValues: { email: "", password: "" },
   });
+  
+
+  useEffect(() => {
+    stop_Loading();
+     reset((formValues) => ({
+    email: formValues.email || prefilledEmail || "",
+    password: formValues.password || "",
+  }));
+  }, []);
 
   const onSubmit = async (data: IFormValues) => {
     login(data.email, data.password);
   };
 
   useEffect(() => {
+    debugger;
     if (isAuthenticated === true) navigate("/portal");
   }, [isAuthenticated, navigate]);
 
+
+   
   return (
     <div className="h-screen w-full bg-[url('/background.jpg')] bg-cover bg-center">
       <div className="flex items-center justify-center min-h-screen">

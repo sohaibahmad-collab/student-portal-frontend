@@ -11,7 +11,7 @@ import {
 
 export const useAuth = () => {
   const dispatch: AppDispatch = useDispatch();
-    const { loading, error } = useSelector((state: RootState) => state.authSlice);
+    const { loading, error,prefilledEmail } = useSelector((state: RootState) => state.authSlice);
 
   const login = (email: string, password: string) => {
     dispatch(loginRequest({ email, password }));
@@ -38,6 +38,7 @@ export const useAuth = () => {
     handleLogout,
     stop_Loading,
     loading,
-    error
+    error,
+    prefilledEmail
   };
 };

@@ -6,12 +6,16 @@ interface IAuthState {
   user: IUser | null;
   loading: boolean;
   error: string | null;
+  prefilledEmail: string | null;
 }
+
+
 
 const initialState: IAuthState = {
   user: null,
   loading: false,
   error: null,
+  prefilledEmail: "",
 };
 
 const authSlice = createSlice({
@@ -62,6 +66,7 @@ const authSlice = createSlice({
       state.error="no error"
       state.loading = false;
       localStorage.setItem("authToken", action.payload.token);
+      state.prefilledEmail = action.payload.email || null;
     },
     registerFailure: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
