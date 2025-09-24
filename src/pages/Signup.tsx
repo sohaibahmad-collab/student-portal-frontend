@@ -11,9 +11,11 @@ import {
 import { useAuth } from "@src/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { useAuthCheck } from "@src/hooks/useAuthCheck";
 
 
 export default function SignUp() {
+  const { isAuthenticated } = useAuthCheck();
   const navigate = useNavigate();
   const { register, loading, error} = useAuth();
   const {
@@ -32,6 +34,10 @@ export default function SignUp() {
     navigate("/");
   }
 }, [error, navigate]);
+
+useEffect(() => {
+    if (isAuthenticated === true) navigate("/portal");
+  }, [isAuthenticated, navigate]);
 
   const onSubmit = (data: SignUpFormData) => {
     const { name, email, password } = data;
