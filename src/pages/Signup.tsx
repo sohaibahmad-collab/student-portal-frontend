@@ -12,9 +12,10 @@ import { useAuth } from "@src/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
+
 export default function SignUp() {
   const navigate = useNavigate();
-  const { register, loading, error } = useAuth();
+  const { register, loading, error} = useAuth();
   const {
     control,
     handleSubmit,
@@ -23,7 +24,7 @@ export default function SignUp() {
     resolver: yupResolver(signUpSchema),
     mode: "onSubmit",
   });
-
+ 
   useEffect(() => {
   if (error === null) return; 
 

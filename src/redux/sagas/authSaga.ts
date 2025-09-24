@@ -20,7 +20,7 @@ function* handleLogin(action: PayloadAction<{ email: string; password: string }>
     yield put(loginSuccess(user));
     toast.success("Logged in successfully!");
   } catch (error: any) {
-    const message = error.response?.data?.message || "Login failed";
+    const message = error.response?.data?.detail || "Login failed";
     yield put(loginFailure(message));
     toast.error(message);
   }
@@ -33,7 +33,7 @@ function* handleRegister(action: PayloadAction<{ name: string; email: string; pa
     yield put(registerSuccess(user));
     toast.success("Registered successfully!");
   } catch (error: any) {
-    const message = error.response?.data?.msg || "Registration failed";
+    const message = error.response?.data?.detail || "Registration failed";
     yield put(registerFailure(message));
     toast.error(message);
   }
