@@ -6,18 +6,35 @@ import Button from "@src/components/common/Button";
 import { useStudents } from "@src/hooks/useStudents";
 import type { IFormValues } from "@src/types/formValues";
 import { studentFormSchema } from "@src/schema/studentFormSchema";
+import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { subjects, grades } from "@src/constants/academic";
 import { useEffect } from "react";
 
-export default function AddStudentData() {
-
-  const { addStudent,fetchStudents } = useStudents();
+export default function EditStudentData() {
   const navigate = useNavigate();
-    useEffect(() => {
-      fetchStudents();
-    }, []);
+  const { updateStudent, fetchStudents,items } = useStudents();
+
+  const { id } = useParams<{ id: string }>();
   
+
+  const student = items.find((s) => s.id == id);
+  console.log(items)
+  useEffect(() => {
+    fetchStudents();
+  }, []);
+
+  useEffect(() => {
+    if (student) {
+      reset({
+        name: student.name,
+        marks: student.marks,
+        subject: student.subject,
+        grade: student.grade,
+      });
+    }
+  }, [items]);
+
   const {
     control,
     handleSubmit,
@@ -25,25 +42,31 @@ export default function AddStudentData() {
     formState: { errors },
   } = useForm<IFormValues>({
     resolver: yupResolver(studentFormSchema),
-    defaultValues: {
-      name: "",
-      marks: 0,
-      subject: "",
-      grade: "",
-    },
+    defaultValues: student
+      ? {
+          name: student.name,
+          marks: student.marks,
+          subject: student.subject,
+          grade: student.grade,
+        }
+      : {
+          name: "",
+          marks: 0,
+          subject: "",
+          grade: "",
+        },
   });
 
   const onSubmit = (data: IFormValues) => {
-    addStudent(data);
+    updateStudent(id as string, data);
     reset();
-    navigate("/portal")
+    navigate("/portal");
   };
-
   return (
     <div className="flex items-center justify-center min-h-screen bg-white">
       <div className="w-full max-w-lg bg-white p-8">
-        <h2 className="text-xl font-semibold text-center mb-8">
-          Add Student Data
+        <h2 className="font-poppins font-medium text-2xl leading-[100%] tracking-normal text-center mb-8 text-black">
+          Edit Student Data
         </h2>
 
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
@@ -121,7 +144,7 @@ export default function AddStudentData() {
               type="button"
               onClick={() => navigate("/portal")}
             />
-            <Button label="Add" variant="primary" type="submit" />
+            <Button label="Save" variant="primary" type="submit" />
           </div>
         </form>
       </div>

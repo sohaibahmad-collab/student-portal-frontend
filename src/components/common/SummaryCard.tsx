@@ -17,9 +17,9 @@ const SummaryCard: React.FC<ISummaryCardProps> = ({
   };
 
   return (
-    <div className={`${colors[color]} px-6 py-4  text-center h-[99px] w-[146px] rounded-[6px]`}>
-      <p className="text-[16px] font-poppins">{title}</p>
-      <p className="text-[24px] font-poppins">{value}</p>
+    <div className={`${colors[color]} px-3  sm:px-6 py-4  text-center  h-[99px] w-[137px]  sm:w-[146px]  rounded-[6px]`}>
+      <p className=" text-[16px] font-poppins">{title}</p>
+      <p className=" text-[24px] font-poppins">{value}</p>
     </div>
   );
 };
